@@ -9,7 +9,9 @@ jobs:
       - image: cimg/python:3.10.2
     steps:
       - checkout
-      - pip install pytest
+      - run:
+          name: Install dependencies
+          command: pip install pytest
       - run:
           name: Run tests
           command: pytest main.py
