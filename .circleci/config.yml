@@ -25,6 +25,10 @@ version: '2.1'
 orbs:
   python: circleci/python@1.0.0
 jobs:
+  publish:
+    steps:
+      - store_test_results:
+          path: result.xml
 workflows:
   main:
     jobs:
@@ -32,5 +36,4 @@ workflows:
           args: '-v --junitxml="result.xml"'
           pkg-manager: pipenv
           test-tool: pytest
-      - store_test_results:
-          path: result.xml
+      - publish
