@@ -38,7 +38,7 @@ jobs:
             pytest main.py -v --junitxml=test-results/junit.xml
 #            pytest main.py -v --junitxml="result.xml"
       - store_test_results:
-          path: test-results
+          path: test-results/junit.xml
 workflows:
   main:
     jobs:
