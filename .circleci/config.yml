@@ -38,6 +38,9 @@ workflows:
 #          args: '-v --junitxml="result.xml"'
 #          pkg-manager: pipenv
 #          test-tool: pytest
-      - run: "pip install pytest"
-      - run: "pytest main.py -v --junitxml='result.xml'"
+      - run:
+          name: "install pytest"
+          command: |
+            pip install pytest
+            pytest main.py -v --junitxml="result.xml"
       - publish
