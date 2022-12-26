@@ -34,7 +34,7 @@ jobs:
           name: "install pytest"
           command: |
             pip install pytest
-            pytest main.py -v --junitxml="result.xml"
+            pytest main.py --junitxml="result.xml"
       - store_test_results:
           path: result.xml
 workflows:
