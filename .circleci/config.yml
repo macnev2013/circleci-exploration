@@ -34,7 +34,7 @@ jobs:
           name: "install pytest"
           command: |
             pip install pytest
-            mkdir test-results
+#            mkdir test-results
             pytest main.py -v --junitxml=test-results/junit.xml
 #            pytest main.py -v --junitxml="result.xml"
       - store_test_results:
