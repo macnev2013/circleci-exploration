@@ -1,41 +1,43 @@
-version: 2.1
-
-orbs:
-  python: circleci/python@1.5.0
-
-jobs:
-  build-and-test:
-    docker:
-      - image: cimg/python:3.10.2
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: pip install pytest
-      - run:
-          name: Run tests
-          command: pytest main.py
-
-workflows:
-  sample:
-    jobs:
-      - build-and-test
-
-#version: '2.1'
+#version: 2.1
+#
 #orbs:
-#  python: circleci/python@1.0.0
+#  python: circleci/python@1.5.0
+#
 #jobs:
-#  publish:
-#    executor: python/default
+#  build-and-test:
+#    docker:
+#      - image: cimg/python:3.10.2
 #    steps:
 #      - checkout
-#      - python/dist
-#      - run: pip install twine && twine upload dist/*
+#      - run:
+#          name: Install dependencies
+#          command: pip install pytest
+#      - run:
+#          name: Run tests
+#          command: pytest main.py
+#
 #workflows:
-#  main:
+#  sample:
 #    jobs:
-#      - python/test:
-#          args: '--dev'
-#          pkg-manager: pipenv
-#          test-tool: pytest
-#      - publish
+#      - build-and-test
+
+version: '2.1'
+orbs:
+  python: circleci/python@1.0.0
+jobs:
+  publish:
+    executor: python/default
+    steps:
+      - checkout
+      - python/dist
+      - run: pip install twine && twine upload dist/*
+workflows:
+  main:
+    jobs:
+      - python/test:
+          args: '-v --junitxml="result.xml"'
+          pkg-manager: pipenv
+          test-tool: pytest
+      - publish
+      - store_test_results:
+          path: result.xml
