@@ -7,7 +7,7 @@ def sub_nums(a, b):
 def test_add_nums():
     assert add_nums(1, 2) == 3
     assert add_nums(1, 3) == 4
-    assert add_nums(1, 4) != 6
+    assert add_nums(1, 4) == 6
 
 def test_sub_nums():
     assert sub_nums(1, 2) == -1
