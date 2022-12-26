@@ -26,6 +26,8 @@ orbs:
   python: circleci/python@1.0.0
 jobs:
   publish:
+    docker:
+      - image: cimg/python:3.10.2
     steps:
       - store_test_results:
           path: result.xml
