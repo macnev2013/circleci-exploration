@@ -29,6 +29,11 @@ jobs:
     docker:
       - image: cimg/python:3.10.2
     steps:
+      - run:
+          name: "install pytest"
+          command: |
+            pip install pytest
+            pytest main.py -v --junitxml="result.xml"
       - store_test_results:
           path: result.xml
 workflows:
@@ -38,9 +43,4 @@ workflows:
 #          args: '-v --junitxml="result.xml"'
 #          pkg-manager: pipenv
 #          test-tool: pytest
-      - run:
-          name: "install pytest"
-          command: |
-            pip install pytest
-            pytest main.py -v --junitxml="result.xml"
       - publish
