@@ -34,8 +34,10 @@ jobs:
 workflows:
   main:
     jobs:
-      - python/test:
-          args: '-v --junitxml="result.xml"'
-          pkg-manager: pipenv
-          test-tool: pytest
+#      - python/test:
+#          args: '-v --junitxml="result.xml"'
+#          pkg-manager: pipenv
+#          test-tool: pytest
+      - run: pip install pytest
+      - run: pytest main.py -v --junitxml="result.xml"
       - publish
