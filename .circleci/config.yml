@@ -39,6 +39,9 @@ jobs:
 #            pytest main.py -v --junitxml="result.xml"
       - store_test_results:
           path: test-results/junit.xml
+      - store_artifacts:
+          path: test-results/junit.xml
+          destination: tr1
 workflows:
   main:
     jobs:
