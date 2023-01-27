@@ -1,0 +1,52 @@
+#version: 2.1
+#
+#orbs:
+#  python: circleci/python@1.5.0
+#
+#jobs:
+#  build-and-test:
+#    docker:
+#      - image: cimg/python:3.10.2
+#    steps:
+#      - checkout
+#      - run:
+#          name: Install dependencies
+#          command: pip install pytest
+#      - run:
+#          name: Run tests
+#          command: pytest main.py
+#
+#workflows:
+#  sample:
+#    jobs:
+#      - build-and-test
+
+version: '2.1'
+orbs:
+  python: circleci/python@1.0.0
+jobs:
+  publish:
+    docker:
+      - image: cimg/python:3.10.2
+    steps:
+      - checkout
+      - run:
+          name: "install pytest"
+          command: |
+            pip install pytest
+            pytest main.py -v --junitxml=test-results/junit.xml
+#            mkdir test-results
+#            pytest main.py -v --junitxml="result.xml"
+      - store_test_results:
+          path: test-results
+#      - store_artifacts:
+#          path: test-results/junit.xml
+#          destination: tr1
+workflows:
+  main:
+    jobs:
+#      - python/test:
+#          args: '-v --junitxml="result.xml"'
+#          pkg-manager: pipenv
+#          test-tool: pytest
+      - publish
